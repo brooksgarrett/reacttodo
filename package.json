@@ -1,8 +1,8 @@
 {
-  "name": "reacttimer",
-  "repository": "https://github.com/brooksgarrett/ReactWeather",
+  "name": "reacttodo",
+  "repository": "https://github.com/brooksgarrett/react-todo",
   "version": "1.0.0",
-  "description": "A simple React app to time things.",
+  "description": "A simple React app to track todos.",
   "main": "index.js",
   "scripts": {
     "start": "node ./server.js",
