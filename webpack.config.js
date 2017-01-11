@@ -30,7 +30,8 @@ module.exports = {
             'node_modules',
             './app/components',
             './app/api',
-            './app/actions'
+            './app/actions',
+            './app/reducers'
         ],
     },
     module: {
