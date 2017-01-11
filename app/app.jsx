@@ -15,9 +15,6 @@ store.subscribe(() => {
     console.log('newState', store.getState());
 });
 
-store.dispatch(actions.addTodo('Clean the Yard'));
-store.dispatch(actions.setSearchText('Clean'));
-
 $(document).foundation();
 
 ReactDOM.render(
