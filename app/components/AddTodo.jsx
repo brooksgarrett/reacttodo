@@ -1,11 +1,15 @@
 var React = require('react');
+var {connect} = require('react-redux');
+var actions = require('actions');
 
-var AddTodo = React.createClass({
+export var AddTodo = React.createClass({
   onSubmit: function (e) {
     e.preventDefault();
     var todoText = this.refs.todoText;
     if (todoText.value.length > 0){
-      this.props.onAddTodo(todoText.value);
+      // No longer use prop callbacks. Dispatch instead
+      //this.props.onAddTodo(todoText.value);
+      this.props.dispatch(actions.addTodo(todoText.value));
       todoText.value = '';
       
     } else {
@@ -24,4 +28,4 @@ var AddTodo = React.createClass({
   }
 });
 
-module.exports = AddTodo;
+export default connect()(AddTodo);
