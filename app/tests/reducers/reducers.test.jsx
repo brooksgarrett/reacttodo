@@ -21,7 +21,7 @@ describe('Reducers', () => {
         searchText: 'Some text'
       };
 
-      var res = reducers.searchTextReducer('', df(action));
+      var res = reducers.searchTextReducer(df(''), df(action));
 
       expect(res).toEqual(action.searchText);
     });
@@ -41,9 +41,69 @@ describe('Reducers', () => {
         type: 'TOGGLE_SHOW_COMPLETED'
       };
 
-      var res = reducers.showCompletedReducer(false, df(action));
+      var res = reducers.showCompletedReducer(df(false), df(action));
 
       expect(res).toBe(true);
+    });
+  });
+  describe('todosReducer', () => {
+    it('should return default state when action type is invalid', () => {
+      var action = {
+        type: 'Something Crazy'
+      };
+
+      var res = reducers.searchTextReducer(undefined, df(action));
+
+      expect(res).toEqual([]);
+    });
+    it('should add a new todo', () => {
+      var action = {
+        type: 'ADD_TODO',
+        text: 'Finish this class'
+      };
+
+      var res = reducers.todosReducer(df([]), df(action));
+
+      expect(res.length).toBe(1);
+      expect(res[0].text).toEqual(action.text);
+    });
+    it('should complete a todo', () => {
+      var action = {
+        type: 'TOGGLE_TODO',
+        id: 123
+      };
+      var currentState = [{
+        id: 123,
+        text: 'Do something',
+        completed: false,
+        createdAt: 123,
+        completedAt: undefined
+      }]
+
+      var res = reducers.todosReducer(df(currentState), df(action));
+
+      expect(res.length).toBe(1);
+      expect(res[0].completed).toBe(true);
+      expect(res[0].completedAt).toNotBe(undefined);
+    });
+    it('should toggle a completed todo', () => {
+      var action = {
+        type: 'TOGGLE_TODO',
+        id: 123
+      };
+      var currentState = [{
+        id: 123,
+        text: 'Do something',
+        completed: true,
+        createdAt: 123,
+        completedAt: 125
+      }]
+
+      var res = reducers.todosReducer(df(currentState), df(action));
+
+      expect(res.length).toBe(1);
+      expect(res[0].completed).toBe(false);
+      expect(res[0].completedAt).toBe(undefined);
     });
   });
 });
