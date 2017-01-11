@@ -23,6 +23,23 @@ describe('Actions', () => {
 
     expect(actualAction).toEqual(action);
   });
+  it('should generate ADD_BULK_TODOS action', () => {
+    var todos = {
+      id: 1,
+      text: 'Anything',
+      completed: false,
+      completedAt: undefined,
+      createdAt: 500
+    };
+    var action = {
+      type: 'ADD_BULK_TODOS',
+      todos
+    };
+
+    var actualAction = actions.addBulkTodos(todos);
+
+    expect(actualAction).toEqual(action);
+  });
   it('should generate toggle show completed action', () => {
     var action = {
       type: 'TOGGLE_SHOW_COMPLETED'
@@ -42,4 +59,5 @@ describe('Actions', () => {
 
     expect(actualAction).toEqual(action);
   });
+  
 });

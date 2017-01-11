@@ -105,5 +105,24 @@ describe('Reducers', () => {
       expect(res[0].completed).toBe(false);
       expect(res[0].completedAt).toBe(undefined);
     });
+    it('should load bulk todos', () => {
+      var todos = [{
+        id: 1,
+        text: 'Anything',
+        completed: false,
+        completedAt: undefined,
+        createdAt: 500
+      }];
+      var action = {
+        type: 'ADD_BULK_TODOS',
+        todos
+      };
+
+      var result = reducers.todosReducer(df([]), df(action));
+
+      expect(result.length).toEqual(1);
+      expect(result[0]).toEqual(todos[0]);
+
+    });
   });
 });

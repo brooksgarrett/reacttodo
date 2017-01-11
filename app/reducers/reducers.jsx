@@ -46,6 +46,11 @@ export var todosReducer = (state = [], action) => {
           return todo;
         }
       });
+    case 'ADD_BULK_TODOS':
+      return [
+        ...state,
+        ...action.todos
+      ];
     default:
       return state;
   };

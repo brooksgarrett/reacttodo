@@ -12,6 +12,13 @@ export var addTodo = (text) => {
   };
 };
 
+export var addBulkTodos = (todos) => {
+  return {
+    type: 'ADD_BULK_TODOS',
+    todos
+  };
+};
+
 export var toggleShowCompleted = () => {
   return {
     type: 'TOGGLE_SHOW_COMPLETED',
