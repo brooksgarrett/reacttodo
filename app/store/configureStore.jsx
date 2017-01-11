@@ -10,13 +10,12 @@ export var configure = () => {
     showCompleted: showCompletedReducer,
     todos: todosReducer
   });
-  const enhancer = compose(
-    // Middleware you want to use in development:
-    applyMiddleware(thunk),
+
+  const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+  const store = createStore(
+      rootReducer,
+      composeEnhancers(applyMiddleware(thunk))
   );
-  const store = createStore(rootReducer, undefined, enhancer);
-
-  //const store = redux.createStore(reducer, composeEnhancers(redux.applyMiddleware(thunk)));
-
+    
   return store;
 };
