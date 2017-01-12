@@ -12,28 +12,22 @@ import firebase from 'firebase';
 
   var db = firebase.database().ref();
 
-  db.set({
-      app: {
-        name: 'My Todo App',
-        version: '1.0'
-      },
-      isRunning: true,
-      user: {
-        name: 'Brooks',
-        age: 30
-      }
+  var todosRef = db.child('todos');
+
+  todosRef.on('child_added', (snapshot) => {
+    console.log('New todo', snapshot.key, snapshot.value);
   });
 
-  db.child('user').on('value', (snapshot) => {
-    console.log('Clap', snapshot.val());
-  });
+  var keyA = todosRef.push().key;
+  var keyB = todosRef.push().key;
+  console.log(keyA, keyB);
 
-  db.update({
-    isRunning: false
-  });
+  var todoA = {text: 'Walk the dog'};
+  var todoB = {text: 'Play a game'};
 
-  db.update({
-    user: {
-      name: 'Bill'
-    }
-  });
+  var updates = {};
+    updates[keyA] = todoA;
+    updates[keyB] = todoB;
+
+
+  todosRef.update(updates);

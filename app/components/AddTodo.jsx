@@ -9,7 +9,7 @@ export var AddTodo = React.createClass({
     if (todoText.value.length > 0){
       // No longer use prop callbacks. Dispatch instead
       //this.props.onAddTodo(todoText.value);
-      this.props.dispatch(actions.addTodo(todoText.value));
+      this.props.dispatch(actions.startAddTodo(todoText.value));
       todoText.value = '';
       
     } else {
