@@ -10,6 +10,30 @@ import firebase from 'firebase';
   };
   firebase.initializeApp(config);
 
-  var db = firebase.database().ref().set({
-      appName: 'Garrett Todo App'
+  var db = firebase.database().ref();
+
+  db.set({
+      app: {
+        name: 'My Todo App',
+        version: '1.0'
+      },
+      isRunning: true,
+      user: {
+        name: 'Brooks',
+        age: 30
+      }
+  });
+
+  db.child('user').on('value', (snapshot) => {
+    console.log('Clap', snapshot.val());
+  });
+
+  db.update({
+    isRunning: false
+  });
+
+  db.update({
+    user: {
+      name: 'Bill'
+    }
   });
